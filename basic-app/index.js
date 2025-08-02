@@ -22,6 +22,30 @@ app.post("/contact" , (req,res) => {
     res.send("Message Recieved");
 })
 
+
+//put request
+app.put("/edit-post/:id" , (req,res) => {
+    console.log("Editing post by put request")
+    res.send("Editing post my put request");
+
+})
+
+//patch request
+app.patch("/edit-post/:id" , (req,res) => {
+    console.log("Editing post by patch request")
+    res.send("Editing post my patch request")
+
+})
+
+//delete request
+app.delete("/comments/:id" , (req,res) => {
+    const commentId = req.params.id
+    console.log("Deleting comments using delete request method");
+    res.send(`Deleted comment no. ${commentId} successfully`)
+})
+
+
+
 app.listen(port, () => {
     console.log(`Server is running port ${port}`);
 })
