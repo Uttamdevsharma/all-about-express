@@ -45,6 +45,22 @@ app.delete("/comments/:id" , (req,res) => {
 })
 
 
+//route parameters
+app.get ("/users/:id" , (req,res) => {
+    const userId = req.params.id;
+    res.send(`UserId : ${userId}`)
+})
+
+
+//handling Query String
+app.get("/search" , (req,res) => {
+    // console.log(req.query);
+    const {category,title} = req.query;
+    console.log(category,title);
+    res.send(`This ${title}  available in this ${category} category.`)
+})
+
+
 
 app.listen(port, () => {
     console.log(`Server is running port ${port}`);
