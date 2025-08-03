@@ -2,9 +2,23 @@ const express = require('express')
 const app = express();
 const port = process.env.PORT || 3000
 
-
 //middleware to parse json request bodies
 app.use(express.json())
+
+
+
+
+//Mount routes
+const postRoutes = require("./src/routes/postRoutes.js");
+const userRoutes = require("./src/routes/userRoutes.js")
+app.use("/users" , userRoutes);
+app.use("/post", postRoutes);
+
+
+
+
+
+
 
 //get request
 app.get('/', (req,res) => {
@@ -23,32 +37,13 @@ app.post("/contact" , (req,res) => {
 })
 
 
-//put request
-app.put("/edit-post/:id" , (req,res) => {
-    console.log("Editing post by put request")
-    res.send("Editing post my put request");
 
-})
-
-//patch request
-app.patch("/edit-post/:id" , (req,res) => {
-    console.log("Editing post by patch request")
-    res.send("Editing post my patch request")
-
-})
 
 //delete request
 app.delete("/comments/:id" , (req,res) => {
     const commentId = req.params.id
     console.log("Deleting comments using delete request method");
     res.send(`Deleted comment no. ${commentId} successfully`)
-})
-
-
-//route parameters
-app.get ("/users/:id" , (req,res) => {
-    const userId = req.params.id;
-    res.send(`UserId : ${userId}`)
 })
 
 
