@@ -3,6 +3,7 @@ const app = express()
 const fs = require('fs')
 const errorHandler = require('./src/middleware/errorHandler')
 const port = process.env.PORT || 3000
+const CustomError = require('./src/middleware/customError')
 
 app.get('/' ,(req,res,next) => {
     const error= new Error("Home route error")
@@ -10,12 +11,25 @@ app.get('/' ,(req,res,next) => {
 })
 
 
+//not found rout
+app.get('/notfound' , (req,res,next) => {
+    next(new CustomError("Resource not found" , 404))
+})
+
+//unauthorized route
+app.get("/unauthorized" , (req,res,next) => {
+    next(new CustomError("Unauthorized access" , 401))
+})
+
+
 app.get('/about', (req,res,next) => {
     fs.readFile('/abc', (err,data) => {
         if(err){
             next(err);
-        }         
-        res.send(data.toString())
+        } else{
+            res.send(data.toString())
+        }        
+        
     })
 
 })
