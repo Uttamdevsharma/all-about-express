@@ -1,0 +1,17 @@
+body{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: gray;
+    text-align: center;
+}
+
+h1,p{
+    margin-bottom: 20px;
+    color: #333;
+}
+
+img{
+    height: 520px;
+    width: 100%;
+}
