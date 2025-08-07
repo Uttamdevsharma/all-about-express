@@ -8,10 +8,35 @@
 <body>
 
     <h1>Upload Images</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data" >
-        <input type="file" name="image" required>
+    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data" >
+        <input type="file" name="image" accept="image/*" required>
         <button type="submit">Upload</button>
     </form>
-    
+
+
+
+    <!-- displaying image -->
+     <h2>Uploaded Images</h2>
+     <img id="uploadedImage" src="" alt="uploaded image" width="400">
+
+
+     <script>
+        document.getElementById('uploadForm').addEventListener("submit" , async(e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const response = await fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+
+            const result = await response.json();
+            if(result.file){
+                document.getElementById("uploadedImage").src = `/upload/${result.file}`
+            }
+
+        })
+     </script>
+
 </body>
 </html>
